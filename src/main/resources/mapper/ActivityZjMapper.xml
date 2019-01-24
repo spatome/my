@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spatome.applet.dao.ActivityZjMapper" >
+  <resultMap id="BaseResultMap" type="com.spatome.applet.entity.ActivityZj" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="owner_no" property="ownerNo" jdbcType="VARCHAR" />
+    <result column="total_count" property="totalCount" jdbcType="INTEGER" />
+    <result column="draw_count" property="drawCount" jdbcType="INTEGER" />
+    <result column="image_name" property="imageName" jdbcType="VARCHAR" />
+    <result column="hint_no" property="hintNo" jdbcType="VARCHAR" />
+    <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="descs" property="descs" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, activity_name, owner_no, total_count, draw_count, image_name, hint_no, begin_time, 
+    end_time, status, descs, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity_zj
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity_zj
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spatome.applet.entity.ActivityZj" useGeneratedKeys="true" keyProperty="id">
+    insert into activity_zj (id, activity_name, owner_no, 
+      total_count, draw_count, image_name, 
+      hint_no, begin_time, end_time, 
+      status, descs, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{activityName,jdbcType=VARCHAR}, #{ownerNo,jdbcType=VARCHAR}, 
+      #{totalCount,jdbcType=INTEGER}, #{drawCount,jdbcType=INTEGER}, #{imageName,jdbcType=VARCHAR}, 
+      #{hintNo,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{descs,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spatome.applet.entity.ActivityZj" useGeneratedKeys="true" keyProperty="id">
+    insert into activity_zj
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="ownerNo != null" >
+        owner_no,
+      </if>
+      <if test="totalCount != null" >
+        total_count,
+      </if>
+      <if test="drawCount != null" >
+        draw_count,
+      </if>
+      <if test="imageName != null" >
+        image_name,
+      </if>
+      <if test="hintNo != null" >
+        hint_no,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="descs != null" >
+        descs,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerNo != null" >
+        #{ownerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCount != null" >
+        #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="drawCount != null" >
+        #{drawCount,jdbcType=INTEGER},
+      </if>
+      <if test="imageName != null" >
+        #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="hintNo != null" >
+        #{hintNo,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null" >
+        #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spatome.applet.entity.ActivityZj" >
+    update activity_zj
+    <set >
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerNo != null" >
+        owner_no = #{ownerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCount != null" >
+        total_count = #{totalCount,jdbcType=INTEGER},
+      </if>
+      <if test="drawCount != null" >
+        draw_count = #{drawCount,jdbcType=INTEGER},
+      </if>
+      <if test="imageName != null" >
+        image_name = #{imageName,jdbcType=VARCHAR},
+      </if>
+      <if test="hintNo != null" >
+        hint_no = #{hintNo,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="descs != null" >
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spatome.applet.entity.ActivityZj" >
+    update activity_zj
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      owner_no = #{ownerNo,jdbcType=VARCHAR},
+      total_count = #{totalCount,jdbcType=INTEGER},
+      draw_count = #{drawCount,jdbcType=INTEGER},
+      image_name = #{imageName,jdbcType=VARCHAR},
+      hint_no = #{hintNo,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectByBean" resultMap="BaseResultMap" parameterType="com.spatome.applet.entity.ActivityZj">
+	select <include refid="Base_Column_List" />
+	from activity_zj T WHERE 1 = 1
+    <if test="activityName != null" >
+      AND activity_name = #{activityName,jdbcType=VARCHAR}
+    </if>
+    <if test="ownerNo != null" >
+      AND owner_no = #{ownerNo,jdbcType=VARCHAR}
+    </if>
+    <if test="totalCount != null" >
+      AND total_count = #{totalCount,jdbcType=INTEGER}
+    </if>
+    <if test="drawCount != null" >
+      AND draw_count = #{drawCount,jdbcType=INTEGER}
+    </if>
+    <if test="imageName != null" >
+      AND image_name = #{imageName,jdbcType=VARCHAR}
+    </if>
+    <if test="hintNo != null" >
+      AND hint_no = #{hintNo,jdbcType=VARCHAR}
+    </if>
+    <if test="beginTime != null" >
+      AND begin_time = #{beginTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null" >
+      AND end_time = #{endTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="status != null" >
+      AND status = #{status,jdbcType=VARCHAR}
+    </if>
+    <if test="descs != null" >
+      AND descs = #{descs,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null" >
+      AND create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null" >
+      AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

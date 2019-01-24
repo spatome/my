@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: applet
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.0.132:3306/applet?useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true&useAffectedRows=true
+    username: root
+    password: kxyx92108
+  redis:
+    host: 192.168.0.132
+    port: 6379
+    database: 3
+    password: kxyx92108
+    timeout: 10000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.spatome.applet.dao
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
+
+redisson:
+  address: redis://192.168.0.132:6379
+  password: kxyx92108
+  database: 3
+
+my:
+  wx-applet-app-id: wx007a5238fec013e0
+  wx-applet-app-secret: 7e88f9e1fe1e812a8754d30784d9342a
+  wx-app-id: 
+  wx-app-secret: 
