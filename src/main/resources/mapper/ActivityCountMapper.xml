@@ -3,7 +3,7 @@
 <mapper namespace="com.spatome.applet.count.dao.ActivityCountMapper" >
   <resultMap id="BaseResultMap" type="com.spatome.applet.count.entity.ActivityCount" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="owner_no" property="ownerNo" jdbcType="INTEGER" />
+    <result column="owner_no" property="ownerNo" jdbcType="VARCHAR" />
     <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
     <result column="activity_type" property="activityType" jdbcType="VARCHAR" />
     <result column="image_name" property="imageName" jdbcType="VARCHAR" />
@@ -31,7 +31,7 @@
       activity_type, image_name, status, 
       create_time, update_time, descs
       )
-    values (#{id,jdbcType=BIGINT}, #{ownerNo,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{ownerNo,jdbcType=VARCHAR}, #{activityName,jdbcType=VARCHAR}, 
       #{activityType,jdbcType=VARCHAR}, #{imageName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{descs,jdbcType=VARCHAR}
       )
@@ -72,7 +72,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="ownerNo != null" >
-        #{ownerNo,jdbcType=INTEGER},
+        #{ownerNo,jdbcType=VARCHAR},
       </if>
       <if test="activityName != null" >
         #{activityName,jdbcType=VARCHAR},
@@ -101,7 +101,7 @@
     update activity_count
     <set >
       <if test="ownerNo != null" >
-        owner_no = #{ownerNo,jdbcType=INTEGER},
+        owner_no = #{ownerNo,jdbcType=VARCHAR},
       </if>
       <if test="activityName != null" >
         activity_name = #{activityName,jdbcType=VARCHAR},
@@ -129,7 +129,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.spatome.applet.count.entity.ActivityCount" >
     update activity_count
-    set owner_no = #{ownerNo,jdbcType=INTEGER},
+    set owner_no = #{ownerNo,jdbcType=VARCHAR},
       activity_name = #{activityName,jdbcType=VARCHAR},
       activity_type = #{activityType,jdbcType=VARCHAR},
       image_name = #{imageName,jdbcType=VARCHAR},
@@ -145,7 +145,7 @@
 	select <include refid="Base_Column_List" />
 	from activity_count T WHERE 1 = 1
     <if test="ownerNo != null" >
-      AND owner_no = #{ownerNo,jdbcType=INTEGER}
+      AND owner_no = #{ownerNo,jdbcType=VARCHAR}
     </if>
     <if test="activityName != null" >
       AND activity_name = #{activityName,jdbcType=VARCHAR}

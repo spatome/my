@@ -5,7 +5,7 @@ import java.util.Date;
 public class ActivityCount {
     private Long id;
 
-    private Integer ownerNo;
+    private String ownerNo;
 
     private String activityName;
 
@@ -29,11 +29,11 @@ public class ActivityCount {
         this.id = id;
     }
 
-    public Integer getOwnerNo() {
+    public String getOwnerNo() {
         return ownerNo;
     }
 
-    public void setOwnerNo(Integer ownerNo) {
+    public void setOwnerNo(String ownerNo) {
         this.ownerNo = ownerNo;
     }
 
