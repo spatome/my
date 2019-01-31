@@ -1,6 +1,7 @@
 package com.spatome.applet.count.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spatome.applet.common.vo.BaseVO;
+import com.spatome.applet.count.common.constants.RedisConstants;
 import com.spatome.applet.count.service.TranService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +36,12 @@ public class Tran99999ServiceImpl extends BaseService implements TranService {
 		super.checkNotEmpty(paramMap);
 
 		log.debug("===========================业务处理=========================");
-		super.redisTemplate.boundHashOps("zw:test:in").increment(name, 1L);
+		System.out.println("==============================");
+		List list = super.redisTemplate.boundListOps(RedisConstants.APPLET_COUNT_ITEM+"7:5").range(0, 0);
+		for (Object object : list) {
+			Long v = (Long)object;
+			System.out.println(v);
+		}
 
 		return result;
 	}

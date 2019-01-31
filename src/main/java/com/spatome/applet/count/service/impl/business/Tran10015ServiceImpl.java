@@ -60,8 +60,8 @@ public class Tran10015ServiceImpl extends BaseService implements TranService {
 
 		for (ActivityCount f : recordList) {
 			ActivityCountVO VO = new ActivityCountVO();
-			VO.setActivityCountId(f.getId());
-			VO.setActivityCountName(f.getActivityName());
+			VO.setActivityId(f.getId());
+			VO.setActivityName(f.getActivityName());
 			VO.setDescs(f.getDescs());
 			VO.setStatus(f.getStatus());
 			VO.setCreateTime(DUtil.formatDateApp(f.getCreateTime()));
