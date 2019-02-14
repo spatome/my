@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spatome.applet.activity.dao.DrawMapper" >
+  <resultMap id="BaseResultMap" type="com.spatome.applet.activity.entity.Draw" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="owner_no" property="ownerNo" jdbcType="VARCHAR" />
+    <result column="activity_id" property="activityId" jdbcType="BIGINT" />
+    <result column="prize_id" property="prizeId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="is_enter" property="isEnter" jdbcType="VARCHAR" />
+    <result column="is_enter_descs" property="isEnterDescs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, owner_no, activity_id, prize_id, create_date, create_time, is_enter, is_enter_descs
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from draw
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from draw
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spatome.applet.activity.entity.Draw" useGeneratedKeys="true" keyProperty="id">
+    insert into draw (id, owner_no, activity_id, 
+      prize_id, create_date, create_time, 
+      is_enter, is_enter_descs)
+    values (#{id,jdbcType=BIGINT}, #{ownerNo,jdbcType=VARCHAR}, #{activityId,jdbcType=BIGINT}, 
+      #{prizeId,jdbcType=BIGINT}, #{createDate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isEnter,jdbcType=VARCHAR}, #{isEnterDescs,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spatome.applet.activity.entity.Draw" useGeneratedKeys="true" keyProperty="id">
+    insert into draw
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ownerNo != null" >
+        owner_no,
+      </if>
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="prizeId != null" >
+        prize_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="isEnter != null" >
+        is_enter,
+      </if>
+      <if test="isEnterDescs != null" >
+        is_enter_descs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ownerNo != null" >
+        #{ownerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null" >
+        #{activityId,jdbcType=BIGINT},
+      </if>
+      <if test="prizeId != null" >
+        #{prizeId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnter != null" >
+        #{isEnter,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnterDescs != null" >
+        #{isEnterDescs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spatome.applet.activity.entity.Draw" >
+    update draw
+    <set >
+      <if test="ownerNo != null" >
+        owner_no = #{ownerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null" >
+        activity_id = #{activityId,jdbcType=BIGINT},
+      </if>
+      <if test="prizeId != null" >
+        prize_id = #{prizeId,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnter != null" >
+        is_enter = #{isEnter,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnterDescs != null" >
+        is_enter_descs = #{isEnterDescs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spatome.applet.activity.entity.Draw" >
+    update draw
+    set owner_no = #{ownerNo,jdbcType=VARCHAR},
+      activity_id = #{activityId,jdbcType=BIGINT},
+      prize_id = #{prizeId,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=DATE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_enter = #{isEnter,jdbcType=VARCHAR},
+      is_enter_descs = #{isEnterDescs,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectByBean" resultMap="BaseResultMap" parameterType="com.spatome.applet.activity.entity.Draw">
+	select <include refid="Base_Column_List" />
+	from draw T WHERE 1 = 1
+    <if test="ownerNo != null" >
+      AND owner_no = #{ownerNo,jdbcType=VARCHAR}
+    </if>
+    <if test="activityId != null" >
+      AND activity_id = #{activityId,jdbcType=BIGINT}
+    </if>
+    <if test="prizeId != null" >
+      AND prize_id = #{prizeId,jdbcType=BIGINT}
+    </if>
+    <if test="createDate != null" >
+      AND create_date = #{createDate,jdbcType=DATE}
+    </if>
+    <if test="createTime != null" >
+      AND create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="isEnter != null" >
+      AND is_enter = #{isEnter,jdbcType=VARCHAR}
+    </if>
+    <if test="isEnterDescs != null" >
+      AND is_enter_descs = #{isEnterDescs,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>
