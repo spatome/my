@@ -1,6 +1,8 @@
 package com.spatome.applet.util;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -90,6 +92,32 @@ public class DUtil {
 	}
 
 	/**
+	 * yyyyMMddHH
+	 */
+	public static String formatOrderDate(Date date) {
+		if (date == null) {
+			return null;
+		}
+
+		return DateFormatUtils.format(date, ORDER_DATE_FORMAT);
+	}
+
+	/**
+	 * yyyyMMddHH
+	 */
+	public static Date parseOrderFormat(String time) {
+		if (time == null || time.length() == 0)
+			return null;
+		try {
+			Date date = DateUtils.parseDate(time, ORDER_DATE_FORMAT);
+			return date;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("格式化时间错误:" + time);
+		}
+	}
+
+	/**
 	 * yyyy-MM-dd
 	 */
 	public static String formatShortDate(Date date) {
@@ -115,168 +143,29 @@ public class DUtil {
 		}
 	}
 
-	// public static Date parseLongDateNoSplit(String time)
-	// {
-	// if (time == null || time.length() <= 0)
-	// return null;
-	// try
-	// {
-	// Date date = LONG_DATE_FORMAT_NO_SPLIT.parse(time);
-	// return date;
-	// }
-	// catch (Exception ex)
-	// {
-	// ex.printStackTrace();
-	// throw new RuntimeException("格式化时间错误");
-	// }
-	// }
-	//
-	// public static Date parseFormatNoMM(String time)
-	// {
-	// if (time == null || time.length() <= 0)
-	// return null;
-	// try
-	// {
-	// Date date = LONG_DATE_FORMAT_NOMM.parse(time);
-	// return date;
-	// }
-	// catch (Exception ex)
-	// {
-	// ex.printStackTrace();
-	// throw new RuntimeException("格式化时间错误");
-	// }
-	// }
-	//
-	// public static Date parseFormat(String time)
-	// {
-	// if (time == null || time.length() <= 0)
-	// return null;
-	// try
-	// {
-	// Date date = LONG_DATE_FORMAT.parse(time);
-	// return date;
-	// }
-	// catch (Exception ex)
-	// {
-	// ex.printStackTrace();
-	// throw new RuntimeException("格式化时间错误", ex);
-	// }
-	// }
-	//
-	// public static String formatDateNoMM(Date date)
-	// {
-	// return LONG_DATE_FORMAT_NOMM.format(date);
-	// }
-	//
-	// public static String formatShortDate(Date date)
-	// {
-	// return formatDate(date, SHORT_DATE_FORMAT);
-	// }
-	//
-	// public static String formatYMDate(Date date)
-	// {
-	// if (date == null)
-	// {
-	// return null;
-	// }
-	// return formatDate(date, YM_DATE_FORMAT);
-	// }
-	//
-	// public static Date parseFormatShort(String time)
-	// {
-	// if (time == null || time.length() <= 0)
-	// return null;
-	// try
-	// {
-	// Date date = SHORT_DATE_FORMAT.parse(time);
-	// return date;
-	// }
-	// catch (Exception ex)
-	// {
-	// ex.printStackTrace();
-	// throw new RuntimeException("格式化时间错误", ex);
-	// }
-	// }
-	//
-	// public static Date parseFormatYM(String time)
-	// {
-	// if (time == null || time.length() <= 0)
-	// return null;
-	// try
-	// {
-	// Date date = YM_DATE_FORMAT.parse(time);
-	// return date;
-	// }
-	// catch (Exception ex)
-	// {
-	// ex.printStackTrace();
-	// throw new RuntimeException("格式化时间错误", ex);
-	// }
-	// }
-	//
-	// public static String formatDate(Date date, DateFormat format)
-	// {
-	// if (date == null)
-	// {
-	// return "";
-	// }
-	// return format.format(date);
-	// }
-	//
-	// public static Date getCurrentDateShort()
-	// {
-	// Calendar cal = Calendar.getInstance();
-	// cal.setTime(new Date());
-	// cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
-	// cal.get(Calendar.DATE), 0, 0, 0);
-	// cal.set(Calendar.MILLISECOND, 0);
-	// return cal.getTime();
-	// }
-	//
-	// /**
-	// * 获取某天的开始时间
-	// * @return
-	// */
-	// public static Date getSomeDayStartTimes(Date date)
-	// {
-	// Calendar calendar = Calendar.getInstance();
-	// calendar.setTime(date);
-	// calendar.set(Calendar.HOUR_OF_DAY, 00);
-	// calendar.set(Calendar.MINUTE, 0);
-	// calendar.set(Calendar.SECOND, 0);
-	// return calendar.getTime();
-	// }
-	//
-	// /**
-	// * 获取某天的结束时间
-	// * @return
-	// */
-	// public static Date getSomeDayEndTimes(Date date)
-	// {
-	// Calendar calendar = Calendar.getInstance();
-	// calendar.setTime(date);
-	// calendar.set(Calendar.HOUR_OF_DAY, 23);
-	// calendar.set(Calendar.MINUTE, 59);
-	// calendar.set(Calendar.SECOND, 59);
-	// return calendar.getTime();
-	// }
-	//
-	// /**
-	// * 获取多少天前的开始时间
-	// * @param dayCount
-	// * @return
-	// */
-	// public static Date getSomeDayStartTime(int dayCount)
-	// {
-	// Calendar calendar = Calendar.getInstance();
-	// calendar.setTime(new Date());
-	// calendar.add(Calendar.DATE, dayCount);
-	// calendar.set(Calendar.HOUR_OF_DAY, 00);
-	// calendar.set(Calendar.MINUTE, 0);
-	// calendar.set(Calendar.SECOND, 0);
-	// return calendar.getTime();
-	// }
-	//
+	/**
+	 * 两个日期之间的连续小时
+	 * 格式:2018010123
+	 * 
+	 * @param beginDate
+	 * @param endDate
+	 * @return
+	 */
+	public static List<Long> getHoursListBetweenDates(Date beginDate, Date endDate) {
+		List<Long> result = new ArrayList<Long>();
+
+		if (beginDate == null || endDate == null || endDate.getTime() < beginDate.getTime()) {
+			return result;
+		}
+
+		do {
+			result.add(Long.valueOf(formatOrderDate(beginDate)));
+			beginDate = DateUtils.addHours(beginDate, 1);
+		} while (beginDate.getTime() <= endDate.getTime());
+
+		return result;
+	}
+
 	// /**
 	// * <pre>
 	// * 增加天数
@@ -292,21 +181,7 @@ public class DUtil {
 	// c.add(Calendar.DATE, days);
 	// return c.getTime();
 	// }
-	//
-	// /**
-	// * <pre>
-	// * 增加num秒后的时间
-	// * </pre>
-	// * @param date
-	// * @param second
-	// * @return
-	// */
-	// public static Date addSecond(Date date, long num)
-	// {
-	// long time = date.getTime() + num * 1000;
-	// return new Date(time);
-	// }
-	//
+
 	// /**
 	// * <pre>
 	// * 两个日期之间的连续日期

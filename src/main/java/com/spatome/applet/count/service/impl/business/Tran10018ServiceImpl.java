@@ -1,5 +1,6 @@
 package com.spatome.applet.count.service.impl.business;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.spatome.applet.common.vo.BaseVO;
 import com.spatome.applet.count.common.constants.RedisConstants;
 import com.spatome.applet.count.service.TranService;
 import com.spatome.applet.count.service.impl.BaseService;
+import com.spatome.applet.util.DUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,7 +43,8 @@ public class Tran10018ServiceImpl extends BaseService implements TranService {
 		super.checkNotEmpty(paramMap);
 
 		log.debug("===========================业务处理=========================");
-		Long count = super.redisTemplate.boundListOps(RedisConstants.APPLET_COUNT_ITEM+activityId+":"+itemId).rightPush(System.currentTimeMillis());
+		String hDateStr = DUtil.formatOrderDate(new Date());
+		Long count = super.stringRedisTemplate.boundHashOps(RedisConstants.APPLET_COUNT_H+activityId+":"+itemId).increment(hDateStr, 1L);
 
 		result.setBody(count);
 

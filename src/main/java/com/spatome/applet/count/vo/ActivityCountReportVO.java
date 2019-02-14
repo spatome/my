@@ -1,9 +1,6 @@
 package com.spatome.applet.count.vo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ActivityCountReportVO {
+public class ActivityCountReportVO<T> {
 
 	private Long activityId;
 	private String activityName;
@@ -11,7 +8,8 @@ public class ActivityCountReportVO {
 	private String reportType;
 	private String dateType;
 
-	private List<SplitItem> splitList;
+	
+	private T data;
 
 	public Long getActivityId() {
 		return activityId;
@@ -37,17 +35,6 @@ public class ActivityCountReportVO {
 		this.dateType = dateType;
 	}
 
-	public List<SplitItem> getSplitList() {
-		if (splitList == null) {
-			splitList = new ArrayList<SplitItem>();
-		}
-		return splitList;
-	}
-
-	public void setSplitList(List<SplitItem> splitList) {
-		this.splitList = splitList;
-	}
-
 	public String getActivityName() {
 		return activityName;
 	}
@@ -56,28 +43,11 @@ public class ActivityCountReportVO {
 		this.activityName = activityName;
 	}
 
-	public static class SplitItem {
-		private String date;
+	public T getData() {
+		return data;
+	}
 
-		public String getDate() {
-			return date;
-		}
-
-		public void setDate(String date) {
-			this.date = date;
-		}
-
-		private List<ActivityItemVO> itemList;
-
-		public List<ActivityItemVO> getItemList() {
-			if (itemList == null) {
-				itemList = new ArrayList<ActivityItemVO>();
-			}
-			return itemList;
-		}
-
-		public void setItemList(List<ActivityItemVO> itemList) {
-			this.itemList = itemList;
-		}
+	public void setData(T data) {
+		this.data = data;
 	}
 }

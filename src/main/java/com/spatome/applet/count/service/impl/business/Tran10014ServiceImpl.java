@@ -61,7 +61,12 @@ public class Tran10014ServiceImpl extends BaseService implements TranService {
 			ActivityItemVO itemVO = new ActivityItemVO();
 			itemVO.setItemId(f.getId());
 			itemVO.setItemName(f.getItemName());
-			Long count = super.redisTemplate.boundListOps(RedisConstants.APPLET_COUNT_ITEM+activityId+":"+f.getId()).size();
+
+			List<Object> objList = super.stringRedisTemplate.boundHashOps(RedisConstants.APPLET_COUNT_H+activityId+":"+f.getId()).values();
+			long count = 0L;
+			for (Object object : objList) {
+				count += Long.valueOf((String)object);
+			}
 			itemVO.setCount(SUtil.NTS(count));
 
 			VO.getItemList().add(itemVO);
