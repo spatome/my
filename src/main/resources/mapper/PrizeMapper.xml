@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spatome.applet.activity.dao.PrizeMapper" >
+  <resultMap id="BaseResultMap" type="com.spatome.applet.activity.entity.Prize" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="owner_no" property="ownerNo" jdbcType="VARCHAR" />
+    <result column="prize_name" property="prizeName" jdbcType="VARCHAR" />
+    <result column="prize_icon_name" property="prizeIconName" jdbcType="VARCHAR" />
+    <result column="prize_image_name" property="prizeImageName" jdbcType="VARCHAR" />
+    <result column="prize_count" property="prizeCount" jdbcType="INTEGER" />
+    <result column="prize_balance" property="prizeBalance" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_enter" property="isEnter" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, owner_no, prize_name, prize_icon_name, prize_image_name, prize_count, prize_balance, 
+    create_time, update_time, is_enter, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from prize
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from prize
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spatome.applet.activity.entity.Prize" useGeneratedKeys="true" keyProperty="id">
+    insert into prize (id, owner_no, prize_name, 
+      prize_icon_name, prize_image_name, prize_count, 
+      prize_balance, create_time, update_time, 
+      is_enter, status)
+    values (#{id,jdbcType=BIGINT}, #{ownerNo,jdbcType=VARCHAR}, #{prizeName,jdbcType=VARCHAR}, 
+      #{prizeIconName,jdbcType=VARCHAR}, #{prizeImageName,jdbcType=VARCHAR}, #{prizeCount,jdbcType=INTEGER}, 
+      #{prizeBalance,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isEnter,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spatome.applet.activity.entity.Prize" useGeneratedKeys="true" keyProperty="id">
+    insert into prize
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ownerNo != null" >
+        owner_no,
+      </if>
+      <if test="prizeName != null" >
+        prize_name,
+      </if>
+      <if test="prizeIconName != null" >
+        prize_icon_name,
+      </if>
+      <if test="prizeImageName != null" >
+        prize_image_name,
+      </if>
+      <if test="prizeCount != null" >
+        prize_count,
+      </if>
+      <if test="prizeBalance != null" >
+        prize_balance,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="isEnter != null" >
+        is_enter,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ownerNo != null" >
+        #{ownerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeName != null" >
+        #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeIconName != null" >
+        #{prizeIconName,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeImageName != null" >
+        #{prizeImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeCount != null" >
+        #{prizeCount,jdbcType=INTEGER},
+      </if>
+      <if test="prizeBalance != null" >
+        #{prizeBalance,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnter != null" >
+        #{isEnter,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spatome.applet.activity.entity.Prize" >
+    update prize
+    <set >
+      <if test="ownerNo != null" >
+        owner_no = #{ownerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeName != null" >
+        prize_name = #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeIconName != null" >
+        prize_icon_name = #{prizeIconName,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeImageName != null" >
+        prize_image_name = #{prizeImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeCount != null" >
+        prize_count = #{prizeCount,jdbcType=INTEGER},
+      </if>
+      <if test="prizeBalance != null" >
+        prize_balance = #{prizeBalance,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnter != null" >
+        is_enter = #{isEnter,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spatome.applet.activity.entity.Prize" >
+    update prize
+    set owner_no = #{ownerNo,jdbcType=VARCHAR},
+      prize_name = #{prizeName,jdbcType=VARCHAR},
+      prize_icon_name = #{prizeIconName,jdbcType=VARCHAR},
+      prize_image_name = #{prizeImageName,jdbcType=VARCHAR},
+      prize_count = #{prizeCount,jdbcType=INTEGER},
+      prize_balance = #{prizeBalance,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_enter = #{isEnter,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectByBean" resultMap="BaseResultMap" parameterType="com.spatome.applet.activity.entity.Prize">
+	select <include refid="Base_Column_List" />
+	from prize T WHERE 1 = 1
+    <if test="ownerNo != null" >
+      AND owner_no = #{ownerNo,jdbcType=VARCHAR}
+    </if>
+    <if test="prizeName != null" >
+      AND prize_name = #{prizeName,jdbcType=VARCHAR}
+    </if>
+    <if test="prizeIconName != null" >
+      AND prize_icon_name = #{prizeIconName,jdbcType=VARCHAR}
+    </if>
+    <if test="prizeImageName != null" >
+      AND prize_image_name = #{prizeImageName,jdbcType=VARCHAR}
+    </if>
+    <if test="prizeCount != null" >
+      AND prize_count = #{prizeCount,jdbcType=INTEGER}
+    </if>
+    <if test="prizeBalance != null" >
+      AND prize_balance = #{prizeBalance,jdbcType=INTEGER}
+    </if>
+    <if test="createTime != null" >
+      AND create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null" >
+      AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="isEnter != null" >
+      AND is_enter = #{isEnter,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null" >
+      AND status = #{status,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

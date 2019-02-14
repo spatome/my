@@ -11,22 +11,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spatome.applet.activity.common.enums.StatusEnum;
-import com.spatome.applet.activity.entity.Activity;
+import com.spatome.applet.activity.entity.Prize;
 import com.spatome.applet.activity.service.TranService;
 import com.spatome.applet.activity.service.impl.BaseService;
 import com.spatome.applet.common.vo.BaseVO;
 
 import lombok.extern.slf4j.Slf4j;
 
-/** 
- * 活动
+/**
  * 基本增删改查
- * 
+ *  
+ * 奖品
  * 增加
  */
 @Service
 @Slf4j
-public class Tran10010ServiceImpl extends BaseService implements TranService {
+public class Tran10020ServiceImpl extends BaseService implements TranService {
 
 	@Override
 	@Transactional
@@ -35,30 +35,35 @@ public class Tran10010ServiceImpl extends BaseService implements TranService {
 
 		log.debug("获取参数");
 		String ownerNo = request.get("ownerNo");
-		String activityName = request.get("activityName");
-		String enterpriseName = request.get("enterpriseName");	//商家名称
-		String allowDayCount = request.get("allowDayCount");	//每天允许抽奖次数
+		String prizeName = request.get("prizeName");
+		String prizeCount = request.get("prizeCount");
+		String isEnter = request.get("isEnter");			//是否登记
+		String prizeIconName = request.get("prizeIconName");
+		String prizeImageName = request.get("prizeImageName");
 		log.debug("检查参数");
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("ownerNo", ownerNo);
-		paramMap.put("activityName", activityName);
-		paramMap.put("enterpriseName", enterpriseName);
-		paramMap.put("allowDayCount", allowDayCount);
+		paramMap.put("prizeName", prizeName);
+		paramMap.put("prizeCount", prizeCount);
+		paramMap.put("isEnter", isEnter);
 		super.checkNotEmpty(paramMap);
 
 		Date date = new Date();
 
 		log.debug("===========================业务处理=========================");
-		Activity newActivity = new Activity();
-		newActivity.setStatus(StatusEnum.ON.name());
-		newActivity.setCreateTime(date);
-		newActivity.setUpdateTime(date);
-		newActivity.setOwnerNo(ownerNo);
-		newActivity.setActivityName(activityName);
-		newActivity.setEnterpriseName(enterpriseName);
-		newActivity.setAllowDayCount(Integer.valueOf(allowDayCount));
-		daoFactory.getActivityMapper().insertSelective(newActivity);
-		result.setBody(newActivity.getId());
+		Prize newPrize = new Prize();
+		newPrize.setStatus(StatusEnum.ON.name());
+		newPrize.setCreateTime(date);
+		newPrize.setUpdateTime(date);
+		newPrize.setOwnerNo(ownerNo);
+		newPrize.setPrizeName(prizeName);
+		newPrize.setPrizeCount(Integer.valueOf(prizeCount));
+		newPrize.setPrizeBalance(newPrize.getPrizeCount());
+		newPrize.setPrizeIconName(prizeIconName);
+		newPrize.setPrizeImageName(prizeImageName);
+		newPrize.setIsEnter(isEnter);
+		daoFactory.getPrizeMapper().insertSelective(newPrize);
+		result.setBody(newPrize.getId());
 
 		return result;
 	}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.spatome.applet.activity.dao.ActivityMapper;
 import com.spatome.applet.activity.dao.ActivityPrizeMapper;
 import com.spatome.applet.activity.dao.DrawMapper;
+import com.spatome.applet.activity.dao.PrizeMapper;
 import com.spatome.applet.activity.dao.SysConfigMapper;
 import com.spatome.applet.activity.factory.DaoFactory;
 
@@ -22,6 +23,8 @@ public class DaoFactoryImpl implements DaoFactory
 	private DrawMapper drawMapper;
 	@Autowired
 	private SysConfigMapper sysConfigMapper;
+	@Autowired
+	private PrizeMapper prizeMapper;
 
 	@Override
 	public ActivityMapper getActivityMapper() {
@@ -41,6 +44,11 @@ public class DaoFactoryImpl implements DaoFactory
 	@Override
 	public SysConfigMapper getSysConfigMapper() {
 		return sysConfigMapper;
+	}
+
+	@Override
+	public PrizeMapper getPrizeMapper() {
+		return prizeMapper;
 	}
 
 }

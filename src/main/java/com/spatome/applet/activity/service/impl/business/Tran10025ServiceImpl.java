@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.spatome.applet.activity.common.enums.StatusEnum;
-import com.spatome.applet.activity.entity.Activity;
+import com.spatome.applet.activity.entity.Prize;
 import com.spatome.applet.activity.service.TranService;
 import com.spatome.applet.activity.service.impl.BaseService;
-import com.spatome.applet.activity.vo.ActivityVO;
+import com.spatome.applet.activity.vo.PrizeVO;
 import com.spatome.applet.common.vo.BaseVO;
 import com.spatome.applet.common.vo.PageVO;
 import com.spatome.applet.util.DUtil;
@@ -25,19 +25,19 @@ import com.spatome.applet.util.SUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /** 
- * 活动
+ * 奖品
  * 
  * 列表
  */
 @Service
 @Slf4j
-public class Tran10015ServiceImpl extends BaseService implements TranService {
+public class Tran10025ServiceImpl extends BaseService implements TranService {
 
 	@Override
 	@Transactional
 	public Object execute(Map<String, String> request, HttpServletRequest req, HttpServletResponse res) {
-		BaseVO<PageVO<ActivityVO>> result = new BaseVO<PageVO<ActivityVO>>();
-		PageVO<ActivityVO> pageVO = new PageVO<ActivityVO>();
+		BaseVO<PageVO<PrizeVO>> result = new BaseVO<PageVO<PrizeVO>>();
+		PageVO<PrizeVO> pageVO = new PageVO<PrizeVO>();
 		result.setBody(pageVO);
 
 		log.debug("获取参数");
@@ -54,17 +54,20 @@ public class Tran10015ServiceImpl extends BaseService implements TranService {
 		pageVO.setPage(currentPage, pageSize);
 		PageHelper.startPage(Integer.valueOf(currentPage), Integer.valueOf(pageSize), false);
 		PageHelper.orderBy("id DESC");
-		Activity activityQ = new Activity();
-		activityQ.setOwnerNo(ownerNo);
-		activityQ.setStatus(StatusEnum.ON.name());
-		List<Activity> recordList = daoFactory.getActivityMapper().selectByBean(activityQ);
+		Prize prizeQ = new Prize();
+		prizeQ.setOwnerNo(ownerNo);
+		prizeQ.setStatus(StatusEnum.ON.name());
+		List<Prize> recordList = daoFactory.getPrizeMapper().selectByBean(prizeQ);
 
-		for (Activity record : recordList) {
-			ActivityVO VO = new ActivityVO();
-			VO.setActivityId(record.getId());
-			VO.setActivityName(record.getActivityName());
-			VO.setEnterpriseName(record.getEnterpriseName());
-			VO.setAllowDayCount(SUtil.NTS(record.getAllowDayCount()));
+		for (Prize record : recordList) {
+			PrizeVO VO = new PrizeVO();
+			VO.setPrizeId(record.getId());
+			VO.setPrizeName(record.getPrizeName());
+			VO.setPrizeCount(SUtil.NTS(record.getPrizeCount()));
+			//VO.setPrizeBalance(record.getPrizeBalance());
+			VO.setIsEnter(record.getIsEnter());
+			VO.setPrizeIconUrl(record.getPrizeIconName());
+			//VO.setPrizeImageUrl(prizeImageUrl);
 			VO.setCreateTime(DUtil.formatDateApp(record.getCreateTime()));
 			VO.setStatus(record.getStatus());
 

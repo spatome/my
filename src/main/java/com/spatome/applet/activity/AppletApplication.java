@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 @EnableConfigurationProperties
 @ComponentScan("com.spatome")
-@MapperScan("com.spatome.applet.count.dao")
+@MapperScan("com.spatome.applet.activity.dao")
 public class AppletApplication {
 
 	public static void main(String[] args) {
