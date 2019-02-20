@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>微信测试</title>
+<script src="/js/vue.min.js"></script>
+<script src="/js/index.js"></script>
+</head>
+
+<body>
+<div id="app">
+	<p>{{msg}}</p>
+	绑定msg<input v-model="msg">
+	<p><button v-on:click="getWxOpenId">获取微信openId</button></p>
+</div>
+
+<script type="text/javascript">
+var vm = new Vue({
+	el: '#app',
+	data:{
+		msg: 'aaaaaaaaaa',
+		wx_code_url: 'https://open.weixin.qq.com/connect/oauth2/authorize',
+		wx_app_id: 'wx6e0110829ad0f4b4'
+	},
+
+  	methods: {
+	    getWxCode: function(){
+	    	location.href = this.wx_code_url
+					+ "?appid="+this.wx_app_id
+					+ "&redirect_uri="+encodeURIComponent(location.href)
+					+ "&response_type=code"
+					+ "&scope=snsapi_base"
+					+ "&state=zw001"
+					+ "#wechat_redirect";
+	    	var code = this.getQueryString("code");
+
+	    	return code;
+	    },
+
+	    getWxOpenId: function(){
+	    	var openId = this.$Cookies.get(this.wx_app_id+'.openId');
+	    	if(!!openId){
+	    		console.log('cookie保存的openId:'+openId);
+	    		this.msg = openId;
+	    	}else{
+  		    	this.$fetch('/wx/getOpenId', {
+		    		code: this.getWxCode()
+		    	}).then((response) => {
+		    		openId = response.body;
+		    		this.$Cookies.set(this.wx_app_id+'.openId', openId, {expires:365});
+		        	console.log("新的openId:"+openId);
+		        	this.msg = openId;
+		      	})
+	    	}
+	    },
+
+ 	 	getQueryString: function(name){
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	        var r = window.location.search.substr(1).match(reg);
+	        if (r != null) return unescape(r[2]); 
+	        return null;
+	    }
+  	}
+})
+</script>
+</body>
+</html>
