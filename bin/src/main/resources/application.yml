@@ -3,11 +3,11 @@ server:
 
 spring:
   application:
-    name: ns
+    name: activity
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.0.132:3306/news?useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true&useAffectedRows=true
+    url: jdbc:mysql://192.168.0.132:3306/applet?useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true&useAffectedRows=true
     username: root
     password: kxyx92108
   redis:

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spatome.applet.ns.dao.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.spatome.applet.ns.entity.Article" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content_name" property="contentName" jdbcType="VARCHAR" />
+    <result column="icon_name" property="iconName" jdbcType="VARCHAR" />
+    <result column="article_type" property="articleType" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="read_count" property="readCount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="cretaer" property="cretaer" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, content_name, icon_name, article_type, tag, source, read_count, create_time, 
+    update_time, status, cretaer
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from article
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from article
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spatome.applet.ns.entity.Article" useGeneratedKeys="true" keyProperty="id">
+    insert into article (id, title, content_name, 
+      icon_name, article_type, tag, 
+      source, read_count, create_time, 
+      update_time, status, cretaer
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{contentName,jdbcType=VARCHAR}, 
+      #{iconName,jdbcType=VARCHAR}, #{articleType,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{readCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{cretaer,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spatome.applet.ns.entity.Article" useGeneratedKeys="true" keyProperty="id">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="contentName != null" >
+        content_name,
+      </if>
+      <if test="iconName != null" >
+        icon_name,
+      </if>
+      <if test="articleType != null" >
+        article_type,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="readCount != null" >
+        read_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="cretaer != null" >
+        cretaer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contentName != null" >
+        #{contentName,jdbcType=VARCHAR},
+      </if>
+      <if test="iconName != null" >
+        #{iconName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleType != null" >
+        #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="cretaer != null" >
+        #{cretaer,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spatome.applet.ns.entity.Article" >
+    update article
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="contentName != null" >
+        content_name = #{contentName,jdbcType=VARCHAR},
+      </if>
+      <if test="iconName != null" >
+        icon_name = #{iconName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleType != null" >
+        article_type = #{articleType,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="cretaer != null" >
+        cretaer = #{cretaer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spatome.applet.ns.entity.Article" >
+    update article
+    set title = #{title,jdbcType=VARCHAR},
+      content_name = #{contentName,jdbcType=VARCHAR},
+      icon_name = #{iconName,jdbcType=VARCHAR},
+      article_type = #{articleType,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      cretaer = #{cretaer,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByBean" resultMap="BaseResultMap" parameterType="com.spatome.applet.ns.entity.Article">
+	select <include refid="Base_Column_List" />
+	from article T WHERE 1 = 1
+    <if test="title != null" >
+      AND title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="contentName != null" >
+      AND content_name = #{contentName,jdbcType=VARCHAR}
+    </if>
+    <if test="iconName != null" >
+      AND icon_name = #{iconName,jdbcType=VARCHAR}
+    </if>
+    <if test="articleType != null" >
+      AND article_type = #{articleType,jdbcType=VARCHAR}
+    </if>
+    <if test="tag != null" >
+      AND tag = #{tag,jdbcType=VARCHAR}
+    </if>
+    <if test="source != null" >
+      AND source = #{source,jdbcType=VARCHAR}
+    </if>
+    <if test="readCount != null" >
+      AND read_count = #{readCount,jdbcType=INTEGER}
+    </if>
+    <if test="createTime != null" >
+      AND create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null" >
+      AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="status != null" >
+      AND status = #{status,jdbcType=VARCHAR}
+    </if>
+    <if test="cretaer != null" >
+      AND cretaer = #{cretaer,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.spatome.applet</groupId>
-	<artifactId>ns</artifactId>
+	<artifactId>activity</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>news</name>
-	<description>ns</description>
+	<name>activity</name>
+	<description>activity</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -175,7 +175,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>ns</finalName>
+		<finalName>activity</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
