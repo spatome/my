@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 /** 
  * 增删改查
  * 
- * 活动
+ * 活动  
  * 修改
  */
 @Service
@@ -63,7 +63,7 @@ public class Tran10012ServiceImpl extends BaseService implements TranService {
 		updateActivity.setAllowDayCount(StringUtils.isBlank(allowDayCount)?null:Integer.valueOf(allowDayCount));
 		updateActivity.setStatus(StringUtils.isBlank(status)?null:status);
 		daoFactory.getActivityMapper().updateByPrimaryKeySelective(updateActivity);
-
+		
 		return result;
 	}
 }
