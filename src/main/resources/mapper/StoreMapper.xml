@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spatome.yj.manager.dao.StoreMapper" >
+  <resultMap id="BaseResultMap" type="com.spatome.yj.manager.entity.Store" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="store_no" property="storeNo" jdbcType="VARCHAR" />
+    <result column="store_type" property="storeType" jdbcType="VARCHAR" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="store_addr" property="storeAddr" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="DECIMAL" />
+    <result column="lon" property="lon" jdbcType="DECIMAL" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="addr_img_url" property="addrImgUrl" jdbcType="VARCHAR" />
+    <result column="city_no" property="cityNo" jdbcType="VARCHAR" />
+    <result column="city_area" property="cityArea" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="descs" property="descs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, store_no, store_type, store_name, store_addr, phone, lat, lon, img_url, addr_img_url, 
+    city_no, city_area, status, create_time, update_time, descs
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from store
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spatome.yj.manager.entity.Store" >
+    insert into store (id, store_no, store_type, 
+      store_name, store_addr, phone, 
+      lat, lon, img_url, addr_img_url, 
+      city_no, city_area, status, 
+      create_time, update_time, descs
+      )
+    values (#{id,jdbcType=BIGINT}, #{storeNo,jdbcType=VARCHAR}, #{storeType,jdbcType=VARCHAR}, 
+      #{storeName,jdbcType=VARCHAR}, #{storeAddr,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{lat,jdbcType=DECIMAL}, #{lon,jdbcType=DECIMAL}, #{imgUrl,jdbcType=VARCHAR}, #{addrImgUrl,jdbcType=VARCHAR}, 
+      #{cityNo,jdbcType=VARCHAR}, #{cityArea,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{descs,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spatome.yj.manager.entity.Store" >
+    insert into store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storeNo != null" >
+        store_no,
+      </if>
+      <if test="storeType != null" >
+        store_type,
+      </if>
+      <if test="storeName != null" >
+        store_name,
+      </if>
+      <if test="storeAddr != null" >
+        store_addr,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="lon != null" >
+        lon,
+      </if>
+      <if test="imgUrl != null" >
+        img_url,
+      </if>
+      <if test="addrImgUrl != null" >
+        addr_img_url,
+      </if>
+      <if test="cityNo != null" >
+        city_no,
+      </if>
+      <if test="cityArea != null" >
+        city_area,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="descs != null" >
+        descs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storeNo != null" >
+        #{storeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeType != null" >
+        #{storeType,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAddr != null" >
+        #{storeAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=DECIMAL},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="addrImgUrl != null" >
+        #{addrImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cityNo != null" >
+        #{cityNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cityArea != null" >
+        #{cityArea,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="descs != null" >
+        #{descs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spatome.yj.manager.entity.Store" >
+    update store
+    <set >
+      <if test="storeNo != null" >
+        store_no = #{storeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeType != null" >
+        store_type = #{storeType,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null" >
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAddr != null" >
+        store_addr = #{storeAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="lon != null" >
+        lon = #{lon,jdbcType=DECIMAL},
+      </if>
+      <if test="imgUrl != null" >
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="addrImgUrl != null" >
+        addr_img_url = #{addrImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cityNo != null" >
+        city_no = #{cityNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cityArea != null" >
+        city_area = #{cityArea,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="descs != null" >
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spatome.yj.manager.entity.Store" >
+    update store
+    set store_no = #{storeNo,jdbcType=VARCHAR},
+      store_type = #{storeType,jdbcType=VARCHAR},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      store_addr = #{storeAddr,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=DECIMAL},
+      lon = #{lon,jdbcType=DECIMAL},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      addr_img_url = #{addrImgUrl,jdbcType=VARCHAR},
+      city_no = #{cityNo,jdbcType=VARCHAR},
+      city_area = #{cityArea,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      descs = #{descs,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

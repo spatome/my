@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spatome.yj.manager.dao.BarberMapper" >
+  <resultMap id="BaseResultMap" type="com.spatome.yj.manager.entity.Barber" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="barber_no" property="barberNo" jdbcType="VARCHAR" />
+    <result column="barber_name" property="barberName" jdbcType="VARCHAR" />
+    <result column="barber_level" property="barberLevel" jdbcType="VARCHAR" />
+    <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="scores" property="scores" jdbcType="INTEGER" />
+    <result column="work_status" property="workStatus" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="descs" property="descs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, store_id, barber_no, barber_name, barber_level, icon_url, scores, work_status, 
+    status, create_time, update_time, descs
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from barber
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from barber
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spatome.yj.manager.entity.Barber" >
+    insert into barber (id, store_id, barber_no, 
+      barber_name, barber_level, icon_url, 
+      scores, work_status, status, 
+      create_time, update_time, descs
+      )
+    values (#{id,jdbcType=BIGINT}, #{storeId,jdbcType=BIGINT}, #{barberNo,jdbcType=VARCHAR}, 
+      #{barberName,jdbcType=VARCHAR}, #{barberLevel,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, 
+      #{scores,jdbcType=INTEGER}, #{workStatus,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{descs,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spatome.yj.manager.entity.Barber" >
+    insert into barber
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="barberNo != null" >
+        barber_no,
+      </if>
+      <if test="barberName != null" >
+        barber_name,
+      </if>
+      <if test="barberLevel != null" >
+        barber_level,
+      </if>
+      <if test="iconUrl != null" >
+        icon_url,
+      </if>
+      <if test="scores != null" >
+        scores,
+      </if>
+      <if test="workStatus != null" >
+        work_status,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="descs != null" >
+        descs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="barberNo != null" >
+        #{barberNo,jdbcType=VARCHAR},
+      </if>
+      <if test="barberName != null" >
+        #{barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="barberLevel != null" >
+        #{barberLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="scores != null" >
+        #{scores,jdbcType=INTEGER},
+      </if>
+      <if test="workStatus != null" >
+        #{workStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="descs != null" >
+        #{descs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spatome.yj.manager.entity.Barber" >
+    update barber
+    <set >
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="barberNo != null" >
+        barber_no = #{barberNo,jdbcType=VARCHAR},
+      </if>
+      <if test="barberName != null" >
+        barber_name = #{barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="barberLevel != null" >
+        barber_level = #{barberLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        icon_url = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="scores != null" >
+        scores = #{scores,jdbcType=INTEGER},
+      </if>
+      <if test="workStatus != null" >
+        work_status = #{workStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="descs != null" >
+        descs = #{descs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spatome.yj.manager.entity.Barber" >
+    update barber
+    set store_id = #{storeId,jdbcType=BIGINT},
+      barber_no = #{barberNo,jdbcType=VARCHAR},
+      barber_name = #{barberName,jdbcType=VARCHAR},
+      barber_level = #{barberLevel,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      scores = #{scores,jdbcType=INTEGER},
+      work_status = #{workStatus,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      descs = #{descs,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
